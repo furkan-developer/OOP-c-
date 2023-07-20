@@ -1,35 +1,12 @@
-﻿using System.Text;
+﻿
+Person person1 = new Person(){Name="Furkan",LastName="Aydın"};
+Person person2 = person1 with {Name="Ferdi"};
 
-Numbers numbers = new();
+System.Console.WriteLine($"person1 Name: {person1.Name} -- person2 Name: {person2.Name}");
+// output: person1 Name: Furkan -- person2 Name: Ferdi
 
-numbers[1] = "One";
-numbers[2,true] = "İki";
-
-System.Console.WriteLine(numbers[2]);
-// İki
-
-class Numbers
+record Person
 {
-    Dictionary<int, string> numbers = new();
-
-    public object this[int number]
-    {
-        get { return numbers[number]; }
-        set { numbers.Add(number, (string)value); }
-    }
-
-    public object this[int number, bool isTurkish]
-    {
-        get { return numbers[number]; }
-        set
-        {   
-            StringBuilder builder = new((string)value);
-            if(isTurkish)
-                builder.Append(" -tr");
-
-            string result = builder.ToString();
-
-            numbers.Add(number,result);
-        }
-    }
+    public string Name { get; init; }
+    public string LastName { get; init; }
 }
